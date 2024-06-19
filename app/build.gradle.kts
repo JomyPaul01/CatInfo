@@ -1,9 +1,11 @@
+import com.google.protobuf.gradle.*
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
+    id("com.google.protobuf") version "0.9.4"
 }
 
 android {
@@ -81,6 +83,10 @@ dependencies {
     implementation(libs.androidx.paging.compose)
     implementation(libs.paging.runtime.ktx)
 
+    //protobuf
+    implementation(libs.androidx.datastore)
+    implementation(libs.protobuf.javalite)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -89,3 +95,21 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:4.27.0"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                create("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
+
+

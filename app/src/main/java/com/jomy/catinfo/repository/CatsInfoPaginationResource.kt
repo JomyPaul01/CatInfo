@@ -1,24 +1,20 @@
 package com.jomy.catinfo.repository
 
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import coil.network.HttpException
 import com.jomy.catinfo.model.CatInfo
-import com.jomy.catinfo.ui.viewmodel.CatsInfoUiState
 import java.io.IOException
 import javax.inject.Inject
 
+/**
+ * PagingSource class to load pager with catinfo with subsequent page calls
+ */
 class CatsInfoPaginationResource @Inject
 constructor(private val catsInfoRepository: NetworkCatsInfoRepository):PagingSource<Int,CatInfo>(){
 
     private val pageSize = 20
     override fun getRefreshKey(state: PagingState<Int, CatInfo>): Int?{
-        //val anchorPosition = state.anchorPosition ?: return null
-        //return state.anchorPosition
-        //val article = state.closestItemToPosition(anchorPosition) ?: return null
-        //return ensureValidKey(key = article.id - (state.config.pageSize / 2))
-
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
@@ -36,7 +32,6 @@ constructor(private val catsInfoRepository: NetworkCatsInfoRepository):PagingSou
 
         }catch (e: IOException) {
            LoadResult.Error(e)
-
        } catch (e: HttpException) {
            LoadResult.Error(e)
        }

@@ -5,6 +5,9 @@ import android.os.Parcelable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * A data class to represent the cat information
+ */
 @Serializable
 data class CatInfo(
     val id:String,
@@ -14,30 +17,12 @@ data class CatInfo(
     val weight:Weight?,
     @SerialName(value = "life_span")
     val lifespan:String?,
-    val adaptability:Int,
-
-    @SerialName(value="affection_level")
-    val affectionLevel:Int,
-
-    @SerialName(value="child_friendly")
-    val childFriendly:Int,
-
-    @SerialName(value = "dog_friendly")
-    val dogFriendly:Int,
-
-    @SerialName(value ="shedding_level")
-    val sheddingLevel:Int,
-
-    @SerialName(value = "energy_level")
-    val energyLevel:Int,
 
     @SerialName(value = "image")
     val image:ImageData? = null,
 
-    val intelligence:Int,
+    var isFavourite: Boolean = false
 
-//    @SerialName(value="wikipedia_url")
-//    val wikipediaUrl:String
 ):Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readString().toString(),
@@ -46,14 +31,8 @@ data class CatInfo(
         parcel.readString(),
         parcel.readParcelable(Weight::class.java.classLoader),
         parcel.readString(),
-        parcel.readInt(),
-        parcel.readInt(),
-        parcel.readInt(),
-        parcel.readInt(),
-        parcel.readInt(),
-        parcel.readInt(),
         parcel.readParcelable(ImageData::class.java.classLoader),
-        parcel.readInt()
+        parcel.readByte() != 0.toByte()
     ) {
     }
 
@@ -64,14 +43,8 @@ data class CatInfo(
         parcel.writeString(description)
         parcel.writeParcelable(weight, flags)
         parcel.writeString(lifespan)
-        parcel.writeInt(adaptability)
-        parcel.writeInt(affectionLevel)
-        parcel.writeInt(childFriendly)
-        parcel.writeInt(dogFriendly)
-        parcel.writeInt(sheddingLevel)
-        parcel.writeInt(energyLevel)
         parcel.writeParcelable(image, flags)
-        parcel.writeInt(intelligence)
+        parcel.writeByte(if (isFavourite) 1 else 0)
     }
 
     override fun describeContents(): Int {

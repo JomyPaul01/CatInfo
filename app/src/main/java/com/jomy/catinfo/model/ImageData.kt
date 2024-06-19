@@ -4,6 +4,9 @@ import android.os.Parcel
 import android.os.Parcelable
 import kotlinx.serialization.Serializable
 
+/**
+ * A data class to represent the image information
+ */
 @Serializable
 data class ImageData(
     val id:String,
@@ -16,8 +19,7 @@ data class ImageData(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readString().toString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)

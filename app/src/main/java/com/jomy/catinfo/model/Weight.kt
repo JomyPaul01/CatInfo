@@ -4,6 +4,9 @@ import android.os.Parcel
 import android.os.Parcelable
 import kotlinx.serialization.Serializable
 
+/**
+ * A data class to represent Cat's weight in different breeds
+ */
 @Serializable
 data class Weight (
     val imperial:String,
@@ -12,8 +15,7 @@ data class Weight (
     constructor(parcel: Parcel) : this(
         parcel.readString().toString(),
         parcel.readString().toString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(imperial)
