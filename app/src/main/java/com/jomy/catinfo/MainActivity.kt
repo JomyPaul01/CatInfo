@@ -5,9 +5,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.jomy.catinfo.ui.screens.CatInfoApp
 import com.jomy.catinfo.ui.theme.CatInfoTheme
+import com.jomy.catinfo.ui.viewmodel.CatsInfoUiState
+import com.jomy.catinfo.ui.viewmodel.CatsInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,7 +22,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CatInfoTheme {
-                CatInfoApp()
+                val viewModel = hiltViewModel<CatsInfoViewModel>()
+                val catInfoUiState: State<CatsInfoUiState> = viewModel.catsInfoUiState.collectAsState()
+
+                CatInfoApp(viewModel = viewModel,catInfoUiState = catInfoUiState)
             }
         }
     }

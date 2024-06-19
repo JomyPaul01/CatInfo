@@ -18,14 +18,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -49,17 +47,15 @@ enum class CatInfoScreen(@StringRes val title: Int) {
  * Composable to set the top app bar and contain Navhost for navigation
  */
 @Composable
-fun CatInfoApp() {
-
-    val viewModel = hiltViewModel<CatsInfoViewModel>()
-    val catInfoUiState: State<CatsInfoUiState> = viewModel.catsInfoUiState.collectAsState()
+fun CatInfoApp(viewModel: CatsInfoViewModel, catInfoUiState: State<CatsInfoUiState>) {
 
     val navController = rememberNavController()
+
     // Get current back stack entry
     val backStackEntry by navController.currentBackStackEntryAsState()
 
-    // Get the name of the current screen
-    val currentScreen =   CatInfoScreen.valueOf(
+    //to get back button in the details screen, invoking backstack entry to recompose app bar
+    CatInfoScreen.valueOf(
         backStackEntry?.destination?.route ?: CatInfoScreen.HOME.name
     )
 
