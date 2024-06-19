@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_package = "com.jomy.catinfo";
+option java_multiple_files = true;
+package datastore;
+
+// Define the message for storing a list of strings
+message StringList {
+    // A repeated field to hold multiple strings
+    repeated string items = 1;
+}

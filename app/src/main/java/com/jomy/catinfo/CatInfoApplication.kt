@@ -5,5 +5,4 @@ import dagger.hilt.android.HiltAndroidApp
 
 
 @HiltAndroidApp
-class CatInfoApplication:Application() {
-}
+class CatInfoApplication:Application()

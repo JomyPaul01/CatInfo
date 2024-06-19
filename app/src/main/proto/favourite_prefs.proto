@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option java_package = "com.jomy.catinfo";
+option java_multiple_files = true;
+
+message FavouriteMap {
+    map<string, string> entries = 1;
+}

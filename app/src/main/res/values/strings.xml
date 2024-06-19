@@ -10,4 +10,7 @@
     <string name="details">Details\n</string>
     <string name="temparament">Temparament\n</string>
     <string name="theyare">"They are "</string>
+    <string name="favouriteIcon">Favourite Button</string>
+    <string name="emptylisterror">No List to display</string>
+    <string name="checknetwork">Check your network and try again</string>
 </resources>

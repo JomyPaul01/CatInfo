@@ -8,13 +8,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
-import retrofit2.create
 import javax.inject.Singleton
-
+/**
+ * Hilt module to provide dependency to retrofit to repository class
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -34,4 +33,5 @@ object NetworkModule {
     @Singleton
     fun provideCatApiService(retrofit: Retrofit): CatApiService =
         retrofit.create(CatApiService::class.java)
+
 }

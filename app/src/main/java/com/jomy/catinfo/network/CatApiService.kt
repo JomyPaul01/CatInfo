@@ -12,25 +12,16 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+/**
+ * retrofit service api interface to fetch cat information
+ */
 interface CatApiService {
 
-
     @GET("breeds")
-    suspend fun getCatsInfo(@Header("x-api-key") key: String? = Constants.APIKEY, @Query("limit") limit: Int, @Query("page") page: Int): List<CatInfo>
-
-    @Headers("x-api-key",Constants.APIKEY)
-    @GET("favourites")
-    suspend fun getFavouriteCats(
+    suspend fun getCatsInfo(
+        @Header("x-api-key") key: String? = Constants.APIKEY,
         @Query("limit") limit: Int,
-        @Query("page") page: Int,
-        @Query("sub_id") userid: String
+        @Query("page") page: Int
     ): List<CatInfo>
 
-    @Headers("x-api-key",Constants.APIKEY)
-    @POST("favourites")
-    suspend fun addFavouriteCat(@Body favouriteModel: FavouriteModel):String
-
-    @Headers("x-api-key",Constants.APIKEY)
-    @DELETE("favorites")
-    suspend fun deleteFavourite(@Path("favouriteId") favouriteId:String)
 }
