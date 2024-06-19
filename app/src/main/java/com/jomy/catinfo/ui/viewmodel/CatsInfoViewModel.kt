@@ -52,7 +52,7 @@ class CatsInfoViewModel @Inject constructor(
             withContext(Dispatchers.IO) {
                 _catsInfoUiState.value = CatsInfoUiState.LoadingGetCatsInfo
                 _catsInfoUiState.value = try {
-                    val catsPagingDataFlow: Flow<PagingData<CatInfo>> = Pager(
+                    val catsPagingDataFlow: = Pager(
                         config = PagingConfig(pageSize = 20, enablePlaceholders = false),
                         pagingSourceFactory = { paginationResource }
                     ).flow.cachedIn(viewModelScope)
