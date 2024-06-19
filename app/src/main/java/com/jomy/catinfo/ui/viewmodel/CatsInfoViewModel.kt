@@ -23,7 +23,6 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
-
 /**
  * Viewmodel to fetch cat breed information and handle favourite cats in data store
  */
@@ -43,7 +42,7 @@ class CatsInfoViewModel @Inject constructor(
         getCatsInfo()
     }
 
-    private suspend fun getFavouriteDataStoreList():StringList{
+    private suspend fun getFavouriteDataStoreList(): StringList {
         return dataStorePreferenceManager.readStringList()
     }
 
@@ -52,7 +51,7 @@ class CatsInfoViewModel @Inject constructor(
             withContext(Dispatchers.IO) {
                 _catsInfoUiState.value = CatsInfoUiState.LoadingGetCatsInfo
                 _catsInfoUiState.value = try {
-                    val catsPagingDataFlow: = Pager(
+                    val catsPagingDataFlow: Flow<PagingData<CatInfo>> = Pager(
                         config = PagingConfig(pageSize = 20, enablePlaceholders = false),
                         pagingSourceFactory = { paginationResource }
                     ).flow.cachedIn(viewModelScope)
