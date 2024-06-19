@@ -176,7 +176,7 @@ private fun CatNameWithFavouriteIcon(
             ),
             modifier = Modifier
                 .size(48.dp)
-                .padding(horizontal = 5.dp)
+                .padding(top=5.dp)
                 .clickable {
                     catInfo.isFavourite = !(catInfo.isFavourite)
                     isFavourite = catInfo.isFavourite
