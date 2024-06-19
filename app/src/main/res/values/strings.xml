@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">CatInfo</string>
+    <string name="home">Home</string>
+    <string name="favourites">Favourites</string>
+    <string name="catphoto">catphoto</string>
+    <string name="weight">Weight</string>
+    <string name="back_button">back button\n</string>
+    <string name="lifespan">LifeSpan</string>
+    <string name="years">years</string>
+    <string name="details">Details\n</string>
+    <string name="temparament">Temparament\n</string>
+    <string name="theyare">"They are "</string>
+</resources>
